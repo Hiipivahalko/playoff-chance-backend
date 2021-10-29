@@ -1,8 +1,12 @@
+
+#from application import app
+
 from flask import Flask
+
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
 
-from router import TeamNames, CheckStatus, Predict
+from application.router import TeamNames, CheckStatus, Predict
 
 app = Flask(__name__)
 CORS(app)
@@ -16,7 +20,3 @@ api.add_resource(HelloWorld, '/')
 api.add_resource(TeamNames, '/api/teams')
 api.add_resource(CheckStatus, '/api/status')
 api.add_resource(Predict, '/api/predict')
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
