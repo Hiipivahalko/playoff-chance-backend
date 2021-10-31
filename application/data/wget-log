@@ -1,0 +1,11 @@
+--2021-10-31 13:58:17--  http://www.nhl.com/stats/teams?reportType=game
+Resolving www.nhl.com (www.nhl.com)... 23.32.106.176
+Connecting to www.nhl.com (www.nhl.com)|23.32.106.176|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘teams?reportType=game’
+
+teams?reportType=game                          [<=>                                                                                    ]       0  --.-KB/s               teams?reportType=game                          [ <=>                                                                                   ] 137,04K  --.-KB/s    in 0,02s   
+
+2021-10-31 13:58:17 (5,65 MB/s) - ‘teams?reportType=game’ saved [140327]
+

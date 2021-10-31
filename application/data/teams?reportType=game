@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="https://assets.nhle.com/nhl/images/favicon.ico" type="image/x-icon">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-80428426-3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      // TODO: Remove this once DSS updates menu links, this is needed in meantime b/c of redirects
+      // Also used in analytics.js
+      const getGtagPath = (path) => {
+        // If we have "team" with no s at the end, add an s
+        if (path.indexOf('team') !== -1 && path.indexOf('teams') === -1) {
+          path = path.replace('team', 'teams');
+        }
+        if (path.indexOf('player') !== -1) {
+          path = path.replace('player', 'skaters');
+        }
+        return path;
+      }
+      let path = getGtagPath(window.location.pathname);
+
+      gtag('config', 'UA-80428426-3', {
+        page_path: path,
+        page_location: window.location.origin + path,
+      });
+    </script>
+
+    <script async type="text/javascript" src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+    <script>
+        window.__SAP_DESKTOP_AD_ID__ = 'div-gpt-ad-633284297381146568-1';
+        window.__SAP_MOBILE_AD_ID__ = 'div-gpt-ad-601553720915223269-1';
+
+        window.googletag = window.googletag || {cmd: []};
+        googletag.cmd.push(function() {
+            googletag.defineSlot('/21668666170/nhl_web_en/stats', [246,68], window.__SAP_DESKTOP_AD_ID__).addService(googletag.pubads());
+            googletag.defineSlot('/21668666170/nhl_web_en/stats', [320,50], window.__SAP_MOBILE_AD_ID__).addService(googletag.pubads());
+
+            googletag.pubads().setForceSafeFrame(true);
+            googletag.pubads().enableSingleRequest();
+            googletag.enableServices();
+        });
+    </script>
+
+    <title>NHL Stats | NHL.com</title>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta name="keywords" content="nhl, hockey, stats, nhl stats, hockey stats, skaters, goalies, teams, leaders" />
+    <meta name="description" content="The official source for NHL Stats including skaters, goalies, teams stats and more." />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="NHL Stats" />
+    <meta property="og:site_name" content="NHL.com" />
+    <meta property="og:url" content="https://www.nhl.com/stats" />
+    <meta property="og:description" content="The official source for NHL Stats including skaters, goalies, teams stats and more." />
+    <meta property="og:image" content="https://nhl.bamcontent.com/images/logos/league/1200x630_NHL.com_FB.JPG" />
+    <meta property="og:image:alt" content="NHL Shield" />
+
+    <link rel="canonical" href="https://www.nhl.com/stats" />
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:400,700" rel="stylesheet" />
+
+    <script>
+        window.__SITE_LANGUAGE_CODE__ = 'en';
+        window.__BASE_REST_URL__ = 'https://api.nhle.com/stats/rest/en';
+        window.__BASE_ASSETS_URL__ = 'http://www.nhl.com/stats/static/';
+        window.__BASE_EXTERNAL_ASSETS_URL__ = 'https://assets.nhle.com';
+        window.__PPT_BASE_URL__ = 'https://live.nhle.com/ppt';
+
+        // TODO: ALL of this needs to get updated with dynamic content
+        window.__SITE_VERSION__ = 68;
+    </script>
+
+    <!-- DSS header dropins -->
+    <meta name="static_url" content="//www-league.nhlstatic.com" />
+    <meta name="server_url" content="https://www.nhl.com" />
+    <meta name="suggest_url" content="//suggest.svc.nhl.com" />
+    <meta name="bamcontent_client_url" content="https://cms.nhl.bamgrid.com" />
+
+    <meta id="metaLogin" name="login_url" content="https://account.nhl.com/ui/?language=en" />
+    <meta id="metaAccount" name="account_url" content="https://account.nhl.com/ui/?language=en&returnLabel=NHL.com/stats" />
+    <meta name="sign_out_url" content="https://account.nhl.com/ui/sign-out?language=en" />
+    <meta name="rogers_login_url" content="https://www.nhl.com/en/login/rogers" />
+    <meta name="rogers_account_url" content="https://gamecentrelive.rogers.com/en/" />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.bamNHLHeader !== undefined) {
+                window.bamNHLHeader.init();
+            }
+        });
+    </script>
+
+    <!-- DSS AWS Header/Footer css -->
+    <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/fed-nhl-lambda-output/builds/css/header.standalone.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://s3.amazonaws.com/fed-nhl-lambda-output/builds/css/footer.standalone.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://www-league.nhlstatic.com/builds/site-core/a8c9df0f71108c5e4329d67cbdc7d047c9dae323_1495816760/styles/site-desktop.css.gz"/>
+
+    <script type="text/javascript" src="http://www.nhl.com/stats/static/js/VisitorAPI.bundle.js?rel=fuV41jA" charset="utf-8"></script>
+    <script type="text/javascript" src="http://www.nhl.com/stats/static/js/AppMeasurement.bundle.js?rel=fuV41jA" charset="utf-8"></script>
+    <script>
+        window.DSS_ANALYTICS = {};
+        window.DSS_ANALYTICS.s_account="nhlglobal15,nhlcom15";
+        window.DSS_ANALYTICS.s=s_gi(s_account);
+    </script>
+    <!-- End DSS header dropins -->
+
+    <script>
+            var rollbarConfig = {
+                accessToken: 'eeb7a7186de44f74ba25571c0778f0ca',
+                captureUncaught: true,
+                captureUnhandledRejections: true,
+                payload: {
+                    environment: 'production'
+                },
+                checkIgnore: function(isUncaught, args, payload) {
+                    var ua = window.navigator.userAgent;
+                    if (ua && ua.indexOf('MSIE') !== -1 || ua.indexOf('Trident/') > -1) {
+                        return true;
+                    }
+                    return false;
+                },
+                ignoredMessages: [
+                    'Script error',
+                    'Loading chunk',
+                    'a.replace'
+                ],
+                hostWhiteList: ['nhl.com', 'nhle.com']
+            };
+    </script>
+</head>
+
+<body>
+    <div id="wrapper">
+        
+<!-- club language/account bar -->
+
+<div class="top-nav__static-wrapper">
+    <div class="top-nav-outer-wrapper">
+        <div class="top-nav-wrapper">
+            <nav class="top-nav" data-header-mini-dict-headersearchnoresultsfound             ="No Results Found"
+data-header-mini-dict-headersearchplaceholder                ="Search"
+data-header-mini-dict-headersearchplaceholderplayersonly     ="Search"
+data-header-mini-dict-messagesearchpleasewait                ="Searching; please wait"
+data-header-mini-dict-statplayerstatusinactive               ="Inactive"
+data-header-mini-dict-statplayerstatusrookie                 ="Rookie"
+data-header-mini-dict-statplayerstatusveteran                ="Active"
+data-header-mini-dict-headersectionsbutton                   ="Sections"
+data-header-mini-dict-seeallresultsforx                      ="See all results for '{{query}}'"
+data-header-locale                                           ="en"
+data-header-disable-spritemaps                               ="true"
+ data-header-account-props-my-rogers                         ="NHL LIVE™"
+data-header-account-props-league-branding                   ="NHL.com"
+data-header-account-props-tv-link                           ="https://www.nhl.com/tv"
+data-header-account-props-rogers-footer                     ="NHL LIVE™ users can access NHL LIVE™ {{tvLink}}"
+data-header-account-props-rogers-footer-tv-link-text        ="here"
+data-header-account-props-edit-profile                      ="Edit Profile"
+data-header-account-props-my-rogers-sign-in-link-text       ="Sign in here"
+data-header-account-props-sign-in-link-text                 ="Sign In to NHL.com"
+data-header-account-props-customer-service-link-text        ="Customer Service"
+data-header-account-props-sign-out-link-text                ="Sign Out"
+data-header-account-props-customer-service-link-url         ="https://www.nhl.com/info/contact-us"
+data-header-account-props-footer                            ="{{myRogers}} User? {{signInLink}}"
+data-header-account-props-rogers-formerly                   ="adRogersFormerly"
+data-header-account-props-my-profile                        ="myProfile"
+data-header-account-props-team-tri-code                     =""
+>
+                    <div class="top-nav__nhl-logo">
+                        <!-- nhl logos -->
+                                <a href="/" class="top-nav__nhl-logo__link" title="NHL.com">
+                                                <img class="logo top-nav__nhl-logo__img" src="//www-league.nhlstatic.com/images/logos/league-dark/133-flat.svg"
+                                                    role="img"
+                                                    alt="NHL"
+                                                    onerror="this.src =
+                                                        '//www-league.nhlstatic.com/images/logos/league-light/133.svg'">
+                                </a>
+                    </div>
+
+
+                    <div class="top-nav__account">
+                        <div role="button" class="top-nav__account__icon-wrapper" tabindex="0" aria-label="profileDropdown" aria-expanded="false">
+                            <i class="top-nav__account__icon top-nav__icon top-nav__icon--account"></i>
+                        </div>
+                        <span class="top-nav__account-text"></span>
+                        <div class="top-nav__account-menu"></div>
+                    </div>
+                    <div aria-label="Open Search" class="top-nav__search" tabindex="0">
+                        <div class="top-nav__search-container">
+                            <i class="top-nav__search__icon top-nav__icon top-nav__icon--search"></i>
+                            <form role="Search" class="top-nav__search-autocomplete" id="top-nav__search-autocomplete">
+                                <input name="name" class="top-nav__search-autocomplete__input" id="top-nav__search-autocomplete__input"
+                                    placeholder="" type="text" value="" autocomplete="off" autocorrect="off" autocapitalization="off" aria-describedby="searchDesc" />
+                                        <span class="sr-only" id="searchDesc">Enter Search Term. Use arrows to navigate between autocomplete results. If no results appear, use Enter to do a full site search.</span>
+                            </form>
+                        </div>
+                    </div>
+                <div class="top-nav__primary">
+                    <button class="top-nav__hamburger top-nav__icon" aria-label="Navigation Menu " aria-expanded="false"></button>
+                    <div class="top-nav__primary__menu-wrapper top-nav__hamburger-menu-wrapper" role="navigation">
+                        <ul class="top-nav__primary__menu top-nav__hamburger-menu">
+                            <li class="top-nav__primary__menu__item top-nav__primary__menu__item--account top-nav__primary__menu__item--default">
+                                <div class="top-nav__primary__menu__item-wrapper">
+                                    <a href="#" class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--account top-nav__primary__menu__item--account__link"><i class="top-nav__primary__menu__item__link--account-icon top-nav__account__icon top-nav__icon top-nav__icon--account"></i><span class="top-nav__primary__menu__item__link__text--account"></span></a>
+                                </div>
+                            </li>
+
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--scores"
+                                        data-no-secondary
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--scores"
+                                                href="https://www.nhl.com/scores"
+                                                data-phone-href="https://www.nhl.com/scores"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--scores">
+                                                Scores
+                                            </span></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--news"
+                                        data-has-secondary
+                                        aria-label="News"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--news"
+                                                href="/news"
+                                                data-phone-href="/news"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--news">
+                                                News
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="News" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--news top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                            <!-- Section: in-this-section -->
+                                                                <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                    <h1 class="top-nav__secondary-section__title">
+                                                                            Analysis
+                                                                    </h1>
+                                                                    <ul class="top-nav__secondary-section__menu">
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-277548856" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-277548856" >NHL Insider</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-278386388" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-278386388" >Super 16 Rankings</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-278542340" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-278542340" >Trades & Transactions</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-277729162" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-277729162" >Over the Boards Mailbag</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-277729150" >Fantasy Hockey</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-281396148" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-281396148" >Short Shifts</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-277729154" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-277729154" >Prospects</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/news/t-281072352" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-281072352" >Free Agency</a></li>
+                                                                    </ul>
+                                                                </section>
+                                                            
+                                                                        <!-- Section: related-links -->
+                                                                            <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--related-links">
+                                                                                <h1 class="top-nav__secondary-section__title">
+                                                                                        Spotlight
+                                                                                </h1>
+                                                                                <ul class="top-nav__secondary-section__menu">
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/schedule" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/schedule" >2021-22 NHL schedule</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/info/nhl-declaration-of-principles/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/nhl-declaration-of-principles/" >This is Hockey</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/community/hockey-is-for-everyone" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/community/hockey-is-for-everyone" >Hockey is for Everyone</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/t-306702280" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/t-306702280" >Color of Hockey</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/hockeyfightscancer" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/hockeyfightscancer" >Hockey Fights Cancer</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/news/t-277549076" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-277549076" >Player Safety</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/news/t-277729160" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/t-277729160" >NHL Situation Room</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/info/nhl-green" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/nhl-green" >NHL Green</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/fans/photos" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/fans/photos" >NHL.com/Photos</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/multimedia/podcasts" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/multimedia/podcasts" >Podcasts</a></li>
+                                                                                </ul>
+                                                                            </section>
+                                                                        
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--video"
+                                        data-has-secondary
+                                        aria-label="Video"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--video"
+                                                href="/video"
+                                                data-phone-href="/video"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--video">
+                                                Video
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Video" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--video top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                            <!-- Section: in-this-section -->
+                                                                <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                    <h1 class="top-nav__secondary-section__title">
+                                                                            More Video
+                                                                    </h1>
+                                                                    <ul class="top-nav__secondary-section__menu">
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-277350912" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-277350912" >Most Popular</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-277753022" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-277753022" >Game Recaps</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-277440360" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-277440360" >Player Safety Decisions</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-277350912" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-277350912" >Viral Video</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/info/video-rulebook" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/video-rulebook" >Video Rulebook</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-280064652" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-280064652" >Top 10 Plays</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-278313242" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-278313242" >Condensed Games</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/video/t-277781830" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-277781830" >Situation Room</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.youtube.com/nhl" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.youtube.com/nhl" >YouTube.com/NHL</a></li>
+                                                                    </ul>
+                                                                </section>
+                                                            
+                                                                        <!-- Section: related-links -->
+                                                                            <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--related-links">
+                                                                                <h1 class="top-nav__secondary-section__title">
+                                                                                        NHL Network
+                                                                                </h1>
+                                                                                <ul class="top-nav__secondary-section__menu">
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/info/network" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/network" >NHL Network Home</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://nhlnetwork.viewerlink.tv/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://nhlnetwork.viewerlink.tv/" >Channel Finder</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/video/t-277774708" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/video/t-277774708" >Best of NHL Network</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/video/t-299508464" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/video/t-299508464" >Fantasy Hockey</a></li>
+                                                                                </ul>
+                                                                            </section>
+                                                                        
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--standings"
+                                        data-no-secondary
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--standings"
+                                                href="/standings"
+                                                data-phone-href="/standings"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--standings">
+                                                Standings
+                                            </span></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--stats"
+                                        data-has-secondary
+                                        aria-label="Stats"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--stats"
+                                                href="http://www.nhl.com/stats/"
+                                                data-phone-href="http://www.nhl.com/stats/"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--stats">
+                                                Stats
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Stats" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--stats top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                            <!-- Section: in-this-section -->
+                                                                <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                    <h1 class="top-nav__secondary-section__title">
+                                                                            Explore
+                                                                    </h1>
+                                                                    <ul class="top-nav__secondary-section__menu">
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/stats/leaders" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/stats/mobile/index" >League Leaders</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/stats/player?navid=nav-sts-indiv#" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/stats/mobile/player" >By Player</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/stats/team?navid=nav-sts-teams#" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="" >By Team</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/stats/milestone?navid=nav-sts-mlstn#" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="" >Milestones</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/standings" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/standings" >Standings</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/info/all-time-nhl-playoff-results" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/all-time-nhl-playoff-results" >All-Time NHL Results</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://records.nhl.com" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://records.nhl.com" >Records.NHL.com</a></li>
+                                                                    </ul>
+                                                                </section>
+                                                            
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--schedule"
+                                        data-has-secondary
+                                        aria-label="Schedule"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--schedule"
+                                                href="/schedule"
+                                                data-phone-href="/schedule"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--schedule">
+                                                Schedule
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Schedule" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--schedule top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                            <!-- Section: in-this-section -->
+                                                                <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                    <h1 class="top-nav__secondary-section__title">
+                                                                            Schedule
+                                                                    </h1>
+                                                                    <ul class="top-nav__secondary-section__menu">
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/schedule" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/schedule" >2021-22 NHL schedule</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/info/nhl-events/2021-22" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/nhl-events/2021-22" >Future Events</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/info/how-to-watch" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/how-to-watch" >How to Watch</a></li>
+                                                                    </ul>
+                                                                </section>
+                                                            
+                                                                        <!-- Section: related-links -->
+                                                                            <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--related-links">
+                                                                                <h1 class="top-nav__secondary-section__title">
+                                                                                        Spotlight
+                                                                                </h1>
+                                                                                <ul class="top-nav__secondary-section__menu">
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/odds" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/odds" >Betting Lines</a></li>
+                                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/fans/nhl-awards-event" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/fans/nhl-awards-event" >NHL Awards</a></li>
+                                                                                </ul>
+                                                                            </section>
+                                                                        
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--players"
+                                        data-has-secondary
+                                        aria-label="Players"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--players"
+                                                href="/player"
+                                                data-phone-href="/player"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--players">
+                                                Players
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Players" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--players top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                            <!-- Section: in-this-section -->
+                                                                <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                    <h1 class="top-nav__secondary-section__title">
+                                                                            Spotlight
+                                                                    </h1>
+                                                                    <ul class="top-nav__secondary-section__menu">
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/player" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/player" >Player Search</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/stats/leaders" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/stats/leaders" >League Leaders</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/info/nhl-awards-trophies" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/info/nhl-awards-trophies" >All-Time Trophies & Winners</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="/fans/nhl-centennial/100-greatest-nhl-players/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/fans/nhl-centennial/100-greatest-nhl-players/" >100 Greatest NHL Players</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/t-283496592" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/t-283496592" >Hall of Fame</a></li>
+                                                                    </ul>
+                                                                </section>
+                                                            
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--app"
+                                        data-no-secondary
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--app"
+                                                href="https://www.nhl.com/info/mobile-app"
+                                                data-phone-href="https://www.nhl.com/info/mobile-app"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--app">
+                                                App
+                                            </span></a>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--tickets"
+                                        data-has-secondary
+                                        aria-label="Tickets"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--tickets"
+                                                href="/tickets"
+                                                data-phone-href="/tickets"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--tickets">
+                                                Tickets
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Tickets" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--tickets top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                        <!-- Section: in-this-section -->
+                                                            <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                <h1 class="top-nav__secondary-section__title">
+                                                                        
+                                                                </h1>
+                                                                <ul class="top-nav__secondary-section__menu">
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.ticketmaster.com/nhl?wt.mc_id=NHL_LEAGUE_TIX_NAV_DROP_DWN&utm_source=NHL.com&utm_medium=client&utm_campaign=NHL_LEAGUE&utm_content=TIX_NAV_DROP_DWN" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.ticketmaster.com/nhl?wt.mc_id=NHL_LEAGUE_TIX_NAV_DROP_DWN&utm_source=NHL.com&utm_medium=client&utm_campaign=NHL_LEAGUE&utm_content=TIX_NAV_DROP_DWN" >NHL Tickets</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.ticketmaster.com/bridgestonenhl-winter-classic-tickets/artist/1517613?ac_link=NHL_TM_NTL_WINTER_CLASSIC_SPLASH_PG_BUY_TIX" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.ticketmaster.com/bridgestonenhl-winter-classic-tickets/artist/1517613?ac_link=NHL_TM_NTL_WINTER_CLASSIC_SPLASH_PG_BUY_TIX" >Discover NHL Winter Classic</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://events.nhl.com/event/2022-nhl-all-star-weekend" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://events.nhl.com/event/2022-nhl-all-star-weekend" >Honda NHL All-Star Weekend</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.ticketmaster.com/nhl-stadium-series-tickets/artist/1939312?ac_link=NHL_TM_NTL_STADIUM_SERIES_SPLASH_PG_BUY_TIX" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.ticketmaster.com/nhl-stadium-series-tickets/artist/1939312?ac_link=NHL_TM_NTL_STADIUM_SERIES_SPLASH_PG_BUY_TIX" >Navy Federal Credit Union NHL Stadium Series</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://events.nhl.com/event/2022-nhl-heritage-classic" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://events.nhl.com/event/2022-nhl-heritage-classic" >NHL Heritage Classic</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://nhlexperiences.com/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://nhlexperiences.com/" >Events Hospitality Packages</a></li>
+                                                                </ul>
+                                                            </section>
+                                                        
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--fantasy"
+                                        data-has-secondary
+                                        aria-label="Fantasy"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--fantasy"
+                                                href="https://www.nhl.com/fans/fantasy-hockey"
+                                                data-phone-href="https://www.nhl.com/fans/fantasy-hockey"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--fantasy">
+                                                Fantasy
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Fantasy" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--fantasy top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                        <!-- Section: in-this-section -->
+                                                            <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                <h1 class="top-nav__secondary-section__title">
+                                                                        Fantasy
+                                                                </h1>
+                                                                <ul class="top-nav__secondary-section__menu">
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://ad.doubleclick.net/ddm/trackclk/N360801.1913355YAHOOADMANAGER/B23723289.313492373;dc_trk_aid=482562123;dc_trk_cid=141795615;u=${deployID}_${hashAudience};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;ltd=" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://ad.doubleclick.net/ddm/trackclk/N360801.1913355YAHOOADMANAGER/B23723289.313492373;dc_trk_aid=482562123;dc_trk_cid=141795615;u=${deployID}_${hashAudience};dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;ltd=" >Sign up: Season-long fantasy hockey</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/fans/fantasy-hockey" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/fans/fantasy-hockey" >NHL.com/Fantasy</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/multimedia/podcasts-nhl-fantasy-on-ice" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/multimedia/podcasts-nhl-fantasy-on-ice" >NHL Fantasy on Ice Podcast</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/nhl-fantasy-hockey-top-250-rankings-players-2019-20/c-281505474?tid=277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/nhl-fantasy-hockey-top-250-rankings-players-2019-20/c-281505474?tid=277729150" >Top 200 Rankings</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/nhl-fantasy-hockey-top-100-forward-rankings-2019-20/c-282775028?tid=277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/nhl-fantasy-hockey-top-100-forward-rankings-2019-20/c-282775028?tid=277729150" >Top 100 Forwards</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/nhl-fantasy-hockey-top-50-defenseman-rankings-2019-20/c-282830728?tid=277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/nhl-fantasy-hockey-top-50-defenseman-rankings-2019-20/c-282830728?tid=277729150" >Top 50 Defensemen</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/nhl-fantasy-hockey-top-25-goaltender-rankings-2019-20/c-282860450?tid=277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/nhl-fantasy-hockey-top-25-goaltender-rankings-2019-20/c-282860450?tid=277729150" >Top 25 Goalies</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="/news/c-306672908?tid=277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="/news/c-306672908?tid=277729150" >Daily Fantasy Picks</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/news/nhl-power-rankings-fantasy-hockey-team-2021-22/c-299081864?tid=277729150" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/news/nhl-power-rankings-fantasy-hockey-team-2021-22/c-299081864?tid=277729150" >Team Power Rankings</a></li>
+                                                                </ul>
+                                                            </section>
+                                                        
+                                            </div>
+                                                        <aside class="secondary-sponsorship">
+                                                            <a class="secondary-sponsorship__link" href="https://www.fanduel.com/nhl">
+                                                                <div class="secondary-sponsorship__sponsored-by">
+                                                                    Play FanDuel
+                                                                </div>
+                                                                <div class="secondary-sponsorship__logo">
+                                                                    <img 
+                                                                        class="secondary-sponsorship__img"
+                                                                        alt="Play FanDuel"
+                                                                        src="//cms.nhl.bamgrid.com/images/photos/303058730/image/raw.png"
+                                                                    />
+                                                                </div>
+                                                            </a>
+                                                        </aside></div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--shop"
+                                        data-has-secondary
+                                        aria-label="Shop"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--shop"
+                                                href="http://www.nhl.com/shop/link.html?id=NHLMainNav"
+                                                data-phone-href="http://www.nhl.com/shop/link.html?id=NHLMainNav"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--shop">
+                                                Shop
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Shop" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--shop top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                        <!-- Section: in-this-section -->
+                                                            <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                <h1 class="top-nav__secondary-section__title">
+                                                                        Shop
+                                                                </h1>
+                                                                <ul class="top-nav__secondary-section__menu">
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/shop/link.html?id=NHLSubNavShop" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/shop/link.html?id=NHLSubNavShop" >NHL Shop - NYC</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://auctions.nhl.com/iSynApp/showHomePage.action?sid=1100803&isynsharedsession=-49tdlN6E5KFskNnhza1CIdajq-qCLds-tdsx4xHdy9EdaSACl02r4aCDzYhNvUm&utm_source=onsite&utm_medium=nhl.com&utm_campaign=mainauctionslink" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://auctions.nhl.com/iSynApp/showHomePage.action?sid=1100803&isynsharedsession=-49tdlN6E5KFskNnhza1CIdajq-qCLds-tdsx4xHdy9EdaSACl02r4aCDzYhNvUm&utm_source=onsite&utm_medium=nhl.com&utm_campaign=mainauctionslink" >Auctions</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/shop/link.html?id=NHLSubNavJerseys" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/shop/link.html?id=NHLSubNavJerseys" >Jerseys</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/shop/link.html?id=NHLSubNavMens" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/shop/link.html?id=NHLSubNavMens" >Men</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/shop/link.html?id=NHLSubNavWomens" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/shop/link.html?id=NHLSubNavWomens" >Women</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="http://www.nhl.com/shop/link.html?id=NHLSubNavKids" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="http://www.nhl.com/shop/link.html?id=NHLSubNavKids" >Kids</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://photos.com/art/nhl" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://photos.com/art/nhl" >Photos.com</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/fans/nhl-shop" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/fans/nhl-shop" >NHL Shop - NYC</a></li>
+                                                                      <li class="top-nav__secondary-section__menu__item"><a href="https://www.discovercard.com/application/displayLanding?pageFileId=double-display-nhl&sc=GAXW&cmpgnid=affinity-pl-nhl-shtb" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.discovercard.com/application/displayLanding?pageFileId=double-display-nhl&sc=GAXW&cmpgnid=affinity-pl-nhl-shtb" >Get NHL Credit Card</a></li>
+                                                                </ul>
+                                                            </section>
+                                                        
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--teams"
+                                        data-has-secondary
+                                        aria-label="Teams"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--teams"
+                                                href="/info/teams"
+                                                data-phone-href="/info/teams"
+                                                    target="_blank"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--teams">
+                                                Teams
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Teams" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--teams top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                                            <section class="top-nav__secondary-section top-nav__secondary-section--conference top-nav__secondary-section--conference--ec">
+                                                                                <h1 class="top-nav__secondary-section__title">Eastern Conference</h1>
+                                                                                <div class="top-nav__secondary-section__subsection-columns">
+                                                                                    <section class="top-nav__secondary-section__subsection top-nav__secondary-section__subsection--division">
+                                                                                        <h1 class="top-nav__secondary-section__subsection__title">Atlantic</h1>
+                                                                                        <ul class="top-nav__secondary-section__menu">
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-6" href="/bruins" data-phone-href="/bruins" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-6"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-6">Boston</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-7" href="/sabres" data-phone-href="/sabres" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-7"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-7">Buffalo</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-17" href="/redwings" data-phone-href="/redwings" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-17"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-17">Detroit</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-13" href="/panthers" data-phone-href="/panthers" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-13"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-13">Florida</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-8" href="https://www.nhl.com/canadiens" data-phone-href="https://www.nhl.com/canadiens" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-8"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-8">Montréal</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-9" href="https://www.nhl.com/senators" data-phone-href="https://www.nhl.com/senators" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-9"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-9">Ottawa</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-14" href="https://www.nhl.com/lightning" data-phone-href="https://www.nhl.com/lightning" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-14"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-14">Tampa Bay</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-10" href="https://www.nhl.com/mapleleafs" data-phone-href="https://www.nhl.com/mapleleafs" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-10"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-10">Toronto</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </section>
+                                                                                    <section class="top-nav__secondary-section__subsection top-nav__secondary-section__subsection--division">
+                                                                                        <h1 class="top-nav__secondary-section__subsection__title">Metropolitan</h1>
+                                                                                        <ul class="top-nav__secondary-section__menu">
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-12" href="https://www.nhl.com/hurricanes" data-phone-href="https://www.nhl.com/hurricanes" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-12"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-12">Carolina</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-29" href="https://www.nhl.com/bluejackets" data-phone-href="https://www.nhl.com/bluejackets" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-29"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-29">Columbus</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-1" href="https://www.nhl.com/devils" data-phone-href="https://www.nhl.com/devils" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-1"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-1">New Jersey</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-2" href="https://www.nhl.com/islanders" data-phone-href="https://www.nhl.com/islanders" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-2"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-2">NY Islanders</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-3" href="https://www.nhl.com/rangers" data-phone-href="https://www.nhl.com/rangers" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-3"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-3">NY Rangers</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-4" href="https://www.nhl.com/flyers" data-phone-href="https://www.nhl.com/flyers" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-4"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-4">Philadelphia</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-5" href="https://www.nhl.com/penguins" data-phone-href="https://www.nhl.com/penguins" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-5"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-5">Pittsburgh</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-15" href="https://www.nhl.com/capitals" data-phone-href="https://www.nhl.com/capitals" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-15"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-15">Washington</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </section>
+                                                                                </div>
+                                                                            </section>
+                                                                            <section class="top-nav__secondary-section top-nav__secondary-section--conference top-nav__secondary-section--conference--">
+                                                                                <h1 class="top-nav__secondary-section__title">Western Conference</h1>
+                                                                                <div class="top-nav__secondary-section__subsection-columns">
+                                                                                    <section class="top-nav__secondary-section__subsection top-nav__secondary-section__subsection--division">
+                                                                                        <h1 class="top-nav__secondary-section__subsection__title">Central</h1>
+                                                                                        <ul class="top-nav__secondary-section__menu">
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-53" href="https://www.nhl.com/coyotes" data-phone-href="https://www.nhl.com/coyotes" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-53"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-53">Arizona</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-16" href="https://www.nhl.com/blackhawks" data-phone-href="https://www.nhl.com/blackhawks" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-16"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-16">Chicago</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-21" href="https://www.nhl.com/avalanche" data-phone-href="https://www.nhl.com/avalanche" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-21"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-21">Colorado</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-25" href="https://www.nhl.com/stars" data-phone-href="https://www.nhl.com/stars" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-25"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-25">Dallas</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-30" href="https://www.nhl.com/wild" data-phone-href="https://www.nhl.com/wild" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-30"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-30">Minnesota</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-18" href="https://www.nhl.com/predators" data-phone-href="https://www.nhl.com/predators" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-18"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-18">Nashville</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-19" href="https://www.nhl.com/blues" data-phone-href="https://www.nhl.com/blues" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-19"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-19">St. Louis</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-52" href="https://www.nhl.com/jets" data-phone-href="https://www.nhl.com/jets" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-52"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-52">Winnipeg</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </section>
+                                                                                    <section class="top-nav__secondary-section__subsection top-nav__secondary-section__subsection--division">
+                                                                                        <h1 class="top-nav__secondary-section__subsection__title">Pacific</h1>
+                                                                                        <ul class="top-nav__secondary-section__menu">
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-24" href="https://www.nhl.com/ducks" data-phone-href="https://www.nhl.com/ducks" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-24"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-24">Anaheim</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-20" href="https://www.nhl.com/flames" data-phone-href="https://www.nhl.com/flames" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-20"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-20">Calgary</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-22" href="https://www.nhl.com/oilers" data-phone-href="https://www.nhl.com/oilers" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-22"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-22">Edmonton</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-26" href="https://www.nhl.com/kings" data-phone-href="https://www.nhl.com/kings" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-26"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-26">Los Angeles</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-28" href="https://www.nhl.com/sharks" data-phone-href="https://www.nhl.com/sharks" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-28"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-28">San Jose</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-55" href="https://www.nhl.com/kraken" data-phone-href="https://www.nhl.com/kraken" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-55"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-55">Seattle</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-23" href="https://www.nhl.com/canucks" data-phone-href="https://www.nhl.com/canucks" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-23"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-23">Vancouver</span></a>
+                                                                                            </li>
+                                                                                            <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--team"><a class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--team top-nav__secondary-section__menu__item__link--team-54" href="https://www.nhl.com/goldenknights" data-phone-href="https://www.nhl.com/goldenknights" >
+                                                                                                 
+                                                                                                    <div class="top-nav__secondary-section__menu__item--team__logo logo-bg-dark--team-54"></div>
+                                                                                                <span class="top-nav__secondary-section__menu__item__link__team-name top-nav__secondary-section__menu__item__link--team-54">Vegas</span></a>
+                                                                                            </li>
+                                                                                        </ul>
+                                                                                    </section>
+                                                                                </div>
+                                                                            </section>
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--nhltv"
+                                        data-has-secondary
+                                        aria-label="Stream Games"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--nhltv"
+                                                href="https://www.nhl.com/info/where-to-stream"
+                                                data-phone-href="https://www.nhl.com/info/where-to-stream"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--nhltv">
+                                                Stream Games
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="Stream Games" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--nhltv top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                            <!-- Section: in-this-section -->
+                                                                <section class="top-nav__secondary-section top-nav__secondary-section--generic top-nav__secondary-section--1-column top-nav__secondary-section--in-this-section">
+                                                                    <h1 class="top-nav__secondary-section__title">
+                                                                            
+                                                                    </h1>
+                                                                    <ul class="top-nav__secondary-section__menu">
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/info/where-to-stream" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/info/where-to-stream" >Where to Stream</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/info/mobile-app" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/info/mobile-app" >Download the NHL App</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://secure.web.nhl.com/#/login?flowId=subscription&locale=en_US" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://secure.web.nhl.com/#/login?flowId=subscription&locale=en_US" >My Account</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://www.nhl.com/info/nhltv-support" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://www.nhl.com/info/nhltv-support" >Support</a></li>
+                                                                          <li class="top-nav__secondary-section__menu__item"><a href="https://plus.espn.com/nhl?ex_cid=DSS-OFF-NHL-Owned_Editorial_Placement-Navigation_Bar-Evergreen-NHL-NHL_Owned_NavigationBar_April2021-US-EN" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--generic" data-phone-href="https://plus.espn.com/nhl?ex_cid=DSS-OFF-NHL-Owned_Editorial_Placement-Navigation_Bar-Evergreen-NHL-NHL_Owned_NavigationBar_April2021-US-EN" >US Users: Get ESPN+</a></li>
+                                                                    </ul>
+                                                                </section>
+                                                            
+                                            </div>
+                                        </div>                                </li>
+                                <li class="top-nav__primary__menu__item top-nav__primary__menu__item--language top-nav__primary__menu__item--default"
+                                        data-has-secondary
+                                        aria-label="EN"
+                                        aria-expanded="false"
+                                >
+                                    <div class="top-nav__primary__menu__item-wrapper">
+                                        <div class="top-nav__primary__menu__item__link__wrapper">
+                                            <a class="top-nav__primary__menu__item__link top-nav__primary__menu__item__link--language"
+                                                href="/"
+                                                data-phone-href="/"
+                                        ><span class="top-nav__primary__menu__item__link__text top-nav__primary__menu__item__link__text--language">
+                                                <span class="top-nav__primary__menu__item__link__text--language__id-and-open-paren">language (</span>EN<span class="top-nav__primary__menu__item__link__text--language__close-paren">)</span>
+                                            </span></a>
+                                        </div>
+                                            <button class="top-nav__secondary__button top-nav__icon" aria-label="EN" aria-expanded="false"></button>
+                                    </div>
+                                        <div class="top-nav__secondary top-nav__secondary--language top-nav__secondary--hidden">
+                                            <div class="top-nav__secondary-section-columns">
+                                                                                    <section class="top-nav__secondary-section top-nav__secondary-section--language">
+                                                                                        <h1 class="top-nav__secondary-section__title">Languages</h1>
+                                                                                        <ul class="top-nav__secondary-section__menu" data-item-count="9">
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--en" lang="en">
+                                                                                                        <a href="/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--en">ENGLISH</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Welcome to NHL.com, the official site of the National Hockey League</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--fr" lang="fr">
+                                                                                                        <a href="/fr/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--fr">FRANÇAIS</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Bienvenue à LNH.com , le site officiel de la Ligue nationale de hockey</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--ru" lang="ru">
+                                                                                                        <a href="/ru/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--ru">РУССКИЙ</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Добро пожаловать на NHL.com, официальный сайт Национальной хоккейной лиги</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--fi" lang="fi">
+                                                                                                        <a href="/fi/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--fi">SUOMI</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Tervetuloa NHL:n viralliselle nettisivustolle NHL.comiin</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--sv" lang="sv">
+                                                                                                        <a href="/sv/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--sv">SVENSKA</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Välkommen till NHL.com, NHL:s officiella web-sida</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--cs" lang="cs">
+                                                                                                        <a href="/cs/" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--cs">ČEŠTINA</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Vítejte na NHL.com, oficiálních stránkách National Hockey League</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--sk" lang="sk">
+                                                                                                        <a href="/sk" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--sk">SLOVENČINA</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Vitajte na NHL.com, oficiálnych stránkach National Hockey League</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--de" lang="de">
+                                                                                                        <a href="/de" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--de">DEUTSCH</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Willkommen auf NHL.com, der offiziellen Seite der National Hockey League</p>
+                                                                                                </li>
+                                                                                                <li class="top-nav__secondary-section__menu__item top-nav__secondary-section__menu__item--language top-nav__secondary-section__menu__item--language--es" lang="es">
+                                                                                                        <a href="/es" class="top-nav__secondary-section__menu__item__link top-nav__secondary-section__menu__item__link--language top-nav__secondary-section__menu__item__link--language--es">ESPAÑOL</a>
+                                                                                                        <p class="top-nav__secondary-section__menu__item__blurb top-nav__secondary-section__menu__item__blurb--language">Bienvenido a NHL.com, el sitio oficial de la National Hockey League</p>
+                                                                                                </li>
+                                                                                        </ul>
+                                                                                    </section>
+                                            </div>
+                                        </div>                                </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- generated: Sun Oct 31 2021 11:14:53 GMT+0000 (Coordinated Universal Time)-->
+
+        <div id="root"></div>
+
+        <footer class="site-footer" >
+    <div class="site-footer__container">
+
+
+                <h2 class="site-footer__heading">Hockey Sites</h2>
+
+                <div class="site-footer__links-container">
+                        <div class="site-footer__link-container">
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true">
+                                    Network Sites
+                                    <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="http://www.theahl.com/" data-phone-href="http://www.theahl.com/"
+                                            >AHL</a>
+                                        </li>
+                                        <li><a href="https://www.theaihl.com/leagues/front_pageAIHL.cfm?clientID=3856&leagueID=11464" data-phone-href="https://www.theaihl.com/leagues/front_pageAIHL.cfm?clientID=3856&leagueID=11464"
+                                            >AIHL</a>
+                                        </li>
+                                        <li><a href="http://www.echl.com/" data-phone-href="http://www.echl.com/"
+                                            >ECHL</a>
+                                        </li>
+                                        <li><a href="http://www.eliteleague.co.uk/" data-phone-href="http://www.eliteleague.co.uk/"
+                                            >EIHL (UK)</a>
+                                        </li>
+                                        <li><a href="http://www.thesphl.com/" data-phone-href="http://www.thesphl.com/"
+                                            >SPHL</a>
+                                        </li>
+                                        <li><a href="http://www.ushl.com/" data-phone-href="http://www.ushl.com/"
+                                            >USHL</a>
+                                        </li>
+                                        <li><a href="http://www.iha.org.au/" data-phone-href="http://www.iha.org.au/"
+                                            >Aussie Hockey</a>
+                                        </li>
+                                        <li><a href="http://www.nhlalumni.net/" data-phone-href="http://www.nhlalumni.net/"
+                                            >NHL Alumni Association</a>
+                                        </li>
+                                        <li><a href="http://www.nhlofficials.com/" data-phone-href="http://www.nhlofficials.com/"
+                                            >NHL Officials Association</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="site-footer__link-container">
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true">
+                                    Player Sites
+                                    <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="http://www.nicklasbackstrom.com/" data-phone-href="http://www.nicklasbackstrom.com/"
+                                            >Nicklas Backstrom</a>
+                                        </li>
+                                        <li><a href="http://www.aleksanderbarkov16.com/" data-phone-href="http://www.aleksanderbarkov16.com/"
+                                            >Aleksander Barkov</a>
+                                        </li>
+                                        <li><a href="http://www.couture39.com/" data-phone-href="http://www.couture39.com/"
+                                            >Logan Couture</a>
+                                        </li>
+                                        <li><a href="http://www.duncankeith.com/" data-phone-href="http://www.duncankeith.com/"
+                                            >Duncan Keith</a>
+                                        </li>
+                                        <li><a href="http://www.anzeseleven.com/" data-phone-href="http://www.anzeseleven.com/"
+                                            >Anze Kopitar</a>
+                                        </li>
+                                        <li><a href="http://www.hlundqvist30.com/" data-phone-href="http://www.hlundqvist30.com/"
+                                            >Henrik Lundqvist</a>
+                                        </li>
+                                        <li><a href="http://malkin71.com/" data-phone-href="http://malkin71.com/"
+                                            >Evgeni Malkin</a>
+                                        </li>
+                                        <li><a href="http://www.bradmarchand.com/" data-phone-href="http://www.bradmarchand.com/"
+                                            >Brad Marchand</a>
+                                        </li>
+                                        <li><a href="http://steen20.com/" data-phone-href="http://steen20.com/"
+                                            >Alex Steen</a>
+                                        </li>
+                                        <li><a href="http://www.pavelbure.net/" data-phone-href="http://www.pavelbure.net/"
+                                            >Pavel Bure (Ret.)</a>
+                                        </li>
+                                        <li><a href="http://www.mikefisher.ca/" data-phone-href="http://www.mikefisher.ca/"
+                                            >Mike Fisher (Ret.)</a>
+                                        </li>
+                                        <li><a href="http://www.jl15.com/" data-phone-href="http://www.jl15.com/"
+                                            >Jamie Langenbrunner (Ret.)</a>
+                                        </li>
+                                        <li><a href="http://www.savard18.com/" data-phone-href="http://www.savard18.com/"
+                                            >Denis Savard (Ret.)</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="site-footer__link-container">
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true">
+                                    Community
+                                    <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="https://www.nhl.com/community/committing-to-change" data-phone-href="https://www.nhl.com/community/committing-to-change"
+                                            >Committing to Change</a>
+                                        </li>
+                                        <li><a href="http://futuregoals.nhl.com/" data-phone-href="http://futuregoals.nhl.com/"
+                                            >Future Goals</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/community/hockey-is-for-everyone" data-phone-href="https://www.nhl.com/community/hockey-is-for-everyone"
+                                            >Hockey is for Everyone</a>
+                                        </li>
+                                        <li><a href="http://www.nhl.com/ice/eventhome.htm?location=/hockeyfightscancer" data-phone-href="http://www.nhl.com/ice/eventhome.htm?location=/hockeyfightscancer"
+                                            >Hockey Fights Cancer</a>
+                                        </li>
+                                        <li><a href="https://www.learntoplay.nhl.com/" data-phone-href="https://www.learntoplay.nhl.com/"
+                                            >Learn To Play</a>
+                                        </li>
+                                        <li><a href="https://www.firstshift.ca" data-phone-href="https://www.firstshift.ca"
+                                            >First Shift</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/nhl-green" data-phone-href="https://www.nhl.com/info/nhl-green"
+                                            >NHL Green</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/this-is-hockey/" data-phone-href="https://www.nhl.com/info/this-is-hockey/"
+                                            >This Is Hockey</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/nhl-declaration-of-principles" data-phone-href="https://www.nhl.com/info/nhl-declaration-of-principles"
+                                            >Declaration of Principles</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="site-footer__link-container">
+                            <div class="dropdown">
+                                <button class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown"
+                                        aria-haspopup="true">
+                                    About
+                                    <span class="caret"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="http://shop.nhl.com/source/BM-NHLcom-HP-Footer-Shop-FunStuff?navid=drippan" data-phone-href="http://shop.nhl.com/source/BM-NHLcom-HP-Footer-Shop-FunStuff?navid=drippan"
+                                            >Shop.NHL.com</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/frequently-asked-questions" data-phone-href="https://www.nhl.com/info/frequently-asked-questions"
+                                            >FAQ</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/supported-devices-mobile" data-phone-href="https://www.nhl.com/info/supported-devices-mobile"
+                                            >Supported Devices</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/nhl-online-transmission-policy" data-phone-href="https://www.nhl.com/info/nhl-online-transmission-policy"
+                                            >NHL Online Transmission Policy</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/careers" data-phone-href="https://www.nhl.com/info/careers"
+                                            >Careers</a>
+                                        </li>
+                                        <li><a href="/info/accessibility" data-phone-href="/info/accessibility"
+                                            >Accessibility</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/contact-us" data-phone-href="https://www.nhl.com/info/contact-us"
+                                            >Contact Us</a>
+                                        </li>
+                                        <li><a href="https://www.nhl.com/info/corporate-marketing-partners" data-phone-href="https://www.nhl.com/info/corporate-marketing-partners"
+                                            >Corporate Marketing Partners</a>
+                                        </li>
+                                        <li><a href="/info/sponsorship-opportunities" data-phone-href="/info/sponsorship-opportunities"
+                                            >Sponsorship Opportunities</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+                <hr class="site-footer__hr">
+
+            <nav class="site-footer__legal-links">
+                    <a class="site-footer__legal-link" href="https://www.nhl.com/info/terms-of-service" data-phone-href="https://www.nhl.com/info/terms-of-service"
+                        >NHL.com Terms of Service</a>
+                    <a class="site-footer__legal-link" href="https://www.nhl.com/info/privacy-policy" data-phone-href="https://www.nhl.com/info/privacy-policy"
+                        >NHL.com Privacy Policy</a>
+                    <a class="site-footer__legal-link" href="https://www.nhl.com/info/frequently-asked-questions" data-phone-href="https://www.nhl.com/info/frequently-asked-questions"
+                        >FAQ</a>
+                    <a class="site-footer__legal-link" href="https://www.nhl.com/info/contact-us" data-phone-href="https://www.nhl.com/info/contact-us"
+                        >Contact Us</a>
+                    <a class="site-footer__legal-link" href="https://www.nhl.com/info/copyright-policy" data-phone-href="https://www.nhl.com/info/copyright-policy"
+                        >Copyright Policy</a>
+                    <a class="site-footer__legal-link" href="/info/do-not-sell" data-phone-href="/info/do-not-sell"
+                        >Do Not Sell My Info</a>
+                    <a class="site-footer__legal-link" href="https://www.nhl.com/info/careers" data-phone-href="https://www.nhl.com/info/careers"
+                        >Careers</a>
+            </nav>
+
+            <div class="site-footer__colophon-container">
+                <a class="site-footer__shield-link"
+                   href=""
+                   title="NHL.com">
+                                <img class="logo site-footer__shield-logo" src="//www-league.nhlstatic.com/images/logos/league-dark/133.svg"
+                                    role="img"
+                                    alt=""
+                                    onerror="this.src =
+                                        '//www-league.nhlstatic.com/images/logos/league-light/133.svg'">
+                </a>
+
+                <p class="site-footer__colophon">NHL.com is the official web site of the National Hockey League. NHL, the NHL Shield, the word mark and image of the Stanley Cup, the Stanley Cup Playoffs logo, the Stanley Cup Final logo, Center Ice name and logo, NHL Conference logos, NHL Winter Classic name, and The Biggest Assist Happens Off The Ice are registered trademarks and Stanley Cup Qualifiers name and logo, NHL.TV, Vintage Hockey word mark and logo, The Game Lives Where You Do, NHL Winter Classic logo, NHL Heritage Classic name and logo, NHL Stadium Series name and logo, NHL All-Star logo, NHL Face-Off name and logo, NHL. TV, NHL Premium, NHL After Dark, NHL GameCenter, NHL GameCenter LIVE, NHL Network name and logo, NHL Tonight name and logo, On The Fly, NHL Network Showdown name and logo, NHL Awards name and logo, NHL Draft name and logo, NHL Mascots, Hockey Fights Cancer, Because It's The Cup, NHL Green name and logo, NHL Vault, Hockey Is For Everyone, NHL Thanksgiving Showdown name and logo, NHL Centennial Classic name and logo, NHL Centennial Season logo, NHL100 Classic name and logo, NHL Global Series name and logo, NHL China Games name and logo, NHL Power Players name and logo, NHL Outdoors at Lake Tahoe name and logo, and Don't Miss A Moment are trademarks of the National Hockey League. All NHL logos and marks and NHL team logos and marks depicted herein are the property of the NHL and the respective teams and may not be reproduced without the prior written consent of NHL Enterprises, L.P. © NHL 2021. All Rights Reserved. All NHL team jerseys customized with NHL players' names and numbers are officially licensed by the NHL and the NHLPA. The Zamboni word mark and configuration of the Zamboni ice resurfacing machine are registered trademarks of Frank J. Zamboni & Co., Inc.© Frank J. Zamboni & Co., Inc. 2021. All Rights Reserved. Any other third party trademarks or copyrights are the property of their respective owners. All rights reserved.</p>
+
+            </div>
+
+    </div>
+</footer>
+<!-- generated: Sun Oct 31 2021 11:14:53 GMT+0000 (Coordinated Universal Time)-->
+    </div>
+
+    <script type="text/javascript" src="http://www.nhl.com/stats/static/js/client.bundle.js?rel=fuV41jA" charset="utf-8"></script>
+
+    <!-- DSS AWS Header/Footer js -->
+    <script src="https://s3.amazonaws.com/fed-nhl-lambda-output/builds/js/header.standalone.js"></script>
+    <script src="https://s3.amazonaws.com/fed-nhl-lambda-output/builds/js/footer.standalone.js"></script>
+</body>
+
+</html>

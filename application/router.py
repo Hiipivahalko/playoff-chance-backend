@@ -5,6 +5,8 @@ from flask_restful import Resource, request
 import json
 from random import randint
 
+from .reg_model import REG_MODEL
+
 teams = ['Carolina Hurricanes',\
 'Columbus Blue Jackets',\
 'New Jersey Devils',\
@@ -86,6 +88,18 @@ class TeamNames(Resource):
         return {'data': teams}
 
 class Predict(Resource):
+    def post(self):
+        next_val = randint(0,2)
+        req_data = request.get_json(force=True)
+        #print(req_data)
+        #print(req_data['team'])
+        vals = ['YES', 'NO', 'MAYBE']
+        result = {'data' : vals[next_val]}
+        #print(result)
+        return result, 200
+        #return jsonify(result= vals[next_val])
+
+class PredictSimulate(Resource):
     def post(self):
         next_val = randint(0,2)
         req_data = request.get_json(force=True)
