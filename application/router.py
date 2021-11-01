@@ -4,8 +4,11 @@ from types import MethodType
 from flask_restful import Resource, request
 import json
 from random import randint
+import pandas as pd
+import numpy as np
 
-from .reg_model import REG_MODEL
+
+
 
 teams = ['Carolina Hurricanes',\
 'Columbus Blue Jackets',\
@@ -36,7 +39,6 @@ teams = ['Carolina Hurricanes',\
 'Edmonton Oilers',\
 'Los Angeles Kings',\
 'San Jose Sharks',\
-'Seattle Kraken',\
 'Vancouver Canucks',\
 'Vegas Golden Knights',\
 ]
@@ -72,9 +74,18 @@ teams_logo = {'Carolina Hurricanes': 'carolina.png',\
 'Edmonton Oilers': 'Edmonton_Oilers.svg',\
 'Los Angeles Kings': 'LA_Kings.svg',\
 'San Jose Sharks': 'San_Jose_Sharks.svg.png',\
-'Seattle Kraken': '',\
 'Vancouver Canucks': 'Vancouver_Canucks.svg',\
 'Vegas Golden Knights': 'Vegas_Golden_Knights.svg.png',\
+}
+
+cols = ['PIM', 'Forward', 'Defense', 'goalie_performance',\
+       'star_player', 'GF/GP', 'GA/GP', 'PP%', 'PK%', 'Net PP%', 'Net PK%',\
+       'Shots/GP', 'SA/GP', 'FOW%']
+
+predict_conversion = {
+    0: 'NO',
+    1: 'YES',
+    2: 'MAYBE'
 }
 
 
@@ -88,13 +99,22 @@ class TeamNames(Resource):
         return {'data': teams}
 
 class Predict(Resource):
+    
     def post(self):
+        from .reg_model import REG_MODEL
         next_val = randint(0,2)
         req_data = request.get_json(force=True)
         #print(req_data)
         #print(req_data['team'])
+        data = np.array([[req_data['pim'],req_data['f_p'], req_data['d_p'], req_data['g_p'], req_data['start_p'], req_data['gf_gp'],\
+            req_data['ga_gp'], req_data['pp'], req_data['pk'], req_data['net_pp'], req_data['net_pk'], req_data['shots_gp'],\
+            req_data['sa_gp'], req_data['fow']] ])
+        df = pd.DataFrame(data=data, columns=cols)
+        #print(df)
+        pred = REG_MODEL.predict(df)
+        print(pred)
         vals = ['YES', 'NO', 'MAYBE']
-        result = {'data' : vals[next_val]}
+        result = {'data' : predict_conversion[pred[0]]}
         #print(result)
         return result, 200
         #return jsonify(result= vals[next_val])
@@ -105,6 +125,7 @@ class PredictSimulate(Resource):
         req_data = request.get_json(force=True)
         #print(req_data)
         #print(req_data['team'])
+        
         vals = ['YES', 'NO', 'MAYBE']
         result = {'data' : vals[next_val]}
         #print(result)
