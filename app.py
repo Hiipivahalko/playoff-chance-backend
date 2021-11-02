@@ -6,7 +6,7 @@ from flask import Flask
 from flask_restful import Resource, Api, reqparse
 from flask_cors import CORS
 
-from application.router import TeamNames, CheckStatus, Predict, PredictSimulate
+from application.router import TeamNames, CheckStatus, Predict, PredictSimulate, Team
 from application.reg_model import build_and_set_model
 
 app = Flask(__name__)
@@ -21,6 +21,7 @@ class HelloWorld(Resource):
 
 api.add_resource(HelloWorld, '/')
 api.add_resource(TeamNames, '/api/teams')
+api.add_resource(Team, '/api/teams/<team_name>')
 api.add_resource(CheckStatus, '/api/status')
 api.add_resource(Predict, '/api/predict')
 api.add_resource(PredictSimulate, '/api/predictSimulate')

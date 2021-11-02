@@ -7,7 +7,8 @@ from random import randint
 import pandas as pd
 import numpy as np
 
-
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 teams = ['Carolina Hurricanes',\
@@ -87,6 +88,9 @@ predict_conversion = {
     1: 'YES',
     2: 'MAYBE'
 }
+print(dir_path)
+data2022 = pd.read_csv(f'{dir_path}/data2022.csv')
+
 
 
 class CheckStatus(Resource):
@@ -98,37 +102,60 @@ class TeamNames(Resource):
     def get(self):
         return {'data': teams}
 
+class Team(Resource):
+    def get(self, team_name):
+        df = data2022
+        t_name = team_name.replace('_', ' ')
+        #print(' ######## t_name:', t_name)
+        df = df[ df['Team'] == t_name]
+        t = df.iloc[0]
+
+        data = {
+            'team': str(t['Team']),
+            'pim': str(t['PIM']),
+            'f_p': str(t['Forward']),
+            'd_p': str(t['Defense']),
+            'g_p': str(t['goalie_performance']),
+            'start_p': str(t['star_player']),
+            'gf_gp': str(t['GF/GP']),
+            'ga_gp': str(t['GA/GP']),
+            'pp': str(t['PP%']),
+            'pk': str(t['PK%']),
+            'net_pp': str(t['Net PP%']),
+            'net_pk': str(t['Net PK%']),
+            'shots_gp': str(t['Shots/GP']),
+            'sa_gp': str(t['SA/GP']),
+            'fow': str(t['FOW%']),
+            'predict': str(t['predict'])
+        }
+        #print(df.iloc[0])
+        #print(data)
+        return data, 201
+
 class Predict(Resource):
     
     def post(self):
         from .reg_model import REG_MODEL
-        next_val = randint(0,2)
         req_data = request.get_json(force=True)
-        #print(req_data)
-        #print(req_data['team'])
+        
         data = np.array([[req_data['pim'],req_data['f_p'], req_data['d_p'], req_data['g_p'], req_data['start_p'], req_data['gf_gp'],\
             req_data['ga_gp'], req_data['pp'], req_data['pk'], req_data['net_pp'], req_data['net_pk'], req_data['shots_gp'],\
             req_data['sa_gp'], req_data['fow']] ])
         df = pd.DataFrame(data=data, columns=cols)
-        #print(df)
+        
         pred = REG_MODEL.predict(df)
-        print(pred)
-        vals = ['YES', 'NO', 'MAYBE']
         result = {'data' : predict_conversion[pred[0]]}
-        #print(result)
         return result, 200
-        #return jsonify(result= vals[next_val])
 
 class PredictSimulate(Resource):
     def post(self):
         next_val = randint(0,2)
         req_data = request.get_json(force=True)
-        #print(req_data)
-        #print(req_data['team'])
+
+        df = data2022
+        df = df[ df['Team'] == req_data['team']]
+        t = df.iloc[0]
         
         vals = ['YES', 'NO', 'MAYBE']
-        result = {'data' : vals[next_val]}
-        #print(result)
+        result = {'data' : predict_conversion[ t['predict'] ]}
         return result, 200
-        #return jsonify(result= vals[next_val])
-
