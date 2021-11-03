@@ -1,6 +1,6 @@
 # playoff-chance-backend
 
-Backend service to Intro to data science course project Playoff-chance. Application gives prediction of playoff spot according teams performance inside game.
+Backend service to Intro to data science course project Playoff-chance. Application gives prediction of playoff spot according NHL hockey teams performance inside game in the season.
 
 Application is running at <playoff-chance.herokuapp.com>
 
